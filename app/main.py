@@ -13,4 +13,4 @@ app.include_router(post.router)
 
 @app.get("/")
 def root():
-    return {"message": "Arzaq API"}
+    return {"message": "Hello this is the Arzaq API"}
