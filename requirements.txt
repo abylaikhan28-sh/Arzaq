@@ -1,7 +1,9 @@
-uvicorn[standard]
 fastapi
-SQLAlchemy
-passlib[bcrypt]
-python-jose[cryptography]
-pydantic
+uvicorn[standard]
 pydantic[email]
+python-multipart
+email-validator
+sqlalchemy
+passlib[bcrypt]
+python-jose
+psycopg2-binary   
