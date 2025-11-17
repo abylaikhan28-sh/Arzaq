@@ -1,15 +1,16 @@
+# arzaq/app/schemas/post.py
+
 from pydantic import BaseModel
 
 class PostCreate(BaseModel):
     title: str
-    content: str | None = None
-    user_id: int
+    content: str
 
-class PostOut(BaseModel):
+class PostResponse(BaseModel):
     id: int
     title: str
-    content: str | None = None
+    content: str
     user_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True

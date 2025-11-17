@@ -1,15 +1,18 @@
+# arzaq/app/schemas/place.py
+
 from pydantic import BaseModel
 
 class PlaceCreate(BaseModel):
     name: str
-    description: str | None = None
-    owner_id: int
+    latitude: float
+    longitude: float
 
-class PlaceOut(BaseModel):
+class PlaceResponse(BaseModel):
     id: int
     name: str
-    description: str | None = None
+    latitude: float
+    longitude: float
     owner_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True

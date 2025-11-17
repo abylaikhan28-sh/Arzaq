@@ -1,14 +1,21 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, Field, EmailStr
 
-class UserCreate(BaseModel):
-    email: EmailStr
-    password: str
-    full_name: str | None = None
-
-class UserOut(BaseModel):
+# Базовая схема, от которой наследуются другие
+class UserBase(BaseModel):
+    # КЛЮЧЕВОЕ ИСПРАВЛЕНИЕ: Используем EmailStr. 
+    # Это заставит Pydantic требовать формат "имя@домен.зона"
+    email: EmailStr = Field(...) 
+    full_name: str = Field(...)
+    
+# Схема для создания (регистрации) нового пользователя
+class UserCreate(UserBase):
+    password: str = Field(...)
+    
+# Схема, которая возвращается в ответе API
+class UserResponse(UserBase):
     id: int
-    email: EmailStr
-    full_name: str | None = None
-
+    role: str = "user"
+    
+    # Конфигурация для SQLAlchemy
     class Config:
-        orm_mode = True
+        from_attributes = True
