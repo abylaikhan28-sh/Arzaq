@@ -39,4 +39,4 @@ app.include_router(post.router)
 
 @app.get("/")
 def root():
-    return {"message": "Arzaq API is running! Check /docs"}
+    return {"message": "Arzaq API is running! Check /docs 123"}
