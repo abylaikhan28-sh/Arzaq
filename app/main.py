@@ -3,12 +3,32 @@
 from fastapi import FastAPI
 from app.database import engine, Base
 from app.routers import user, place, comment, post, auth
-from app import models # <--- Загружаем модели, чтобы SQLAlchemy их видела
+from fastapi.middleware.cors import CORSMiddleware
+from app import models
+
 
 # Создаем таблицы в БД (если их нет)
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Arzaq API")
+
+
+
+origins = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "https://arzaqmeal.vercel.app",
+    "https://*.vercel.app",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 # Включаем роутеры
 app.include_router(auth.router)
